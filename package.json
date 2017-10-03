@@ -1,0 +1,26 @@
+{
+  "name": "marcelo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Marcelo",
+  "license": "ISC",
+  "dependencies": {
+    "bower": "^1.8.0",
+    "http-server": "^0.9.0",
+    "nodemon": "^1.11.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcelojunin/marcelo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcelojunin/marcelo/issues"
+  },
+  "homepage": "https://github.com/marcelojunin/marcelo#readme",
+  "description": ""
+}
