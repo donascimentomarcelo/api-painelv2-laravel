@@ -1,0 +1,223 @@
+<div class="content" id="inicio">
+	<div class="header" parallax-background parallax-ratio="0.5">
+		<section name="home">
+			<nav class="menu-hide">
+				<ul>
+					<li><a du-smooth-scroll="home"  du-scrollspy>Início</a></li>
+					<li><a du-smooth-scroll="profile"  du-scrollspy>Quem sou eu</a></li>
+					<li><a du-smooth-scroll="project"  du-scrollspy>Projetos</a></li>
+					<li><a du-smooth-scroll="contact" du-scrollspy>Contato</a></li>
+					<li><a href="http://github.com/marcelojunin/">Projetos no Github</a></li>
+				</ul>
+			</nav>
+
+	    <div drag-circular-menu 
+		     angle="30" 
+		     placement="topLeft" 
+		     button-config="menuConfig3" 
+		     menu-items="menuItems" 
+		     default-open="false"
+		     onwing-click="onWingClick(wing)"
+		     class="hide-desktop">
+		</div>  
+		<div class="container-painel">
+					<img src="../img/logo1.png" class="logo"><br/>	
+		</div>
+		<div class="text-initial">
+			<span typewrite="" type-delay="100" text="stuff" initial-delay="1.5s" callback-fn="activateTitle()" class="ng-isolate-scope"></span>
+		</div>
+		</section>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="container-profile text-profile">
+					 		<section name="profile" id="perfil">
+							<h1>Um pouquinho sobre mim.</h1>
+							<div class="col container-photo-margins">
+								<img src="../img/perfil1.jpg" class="container-photo" parallax-background parallax-ratio="0.10">
+							</div>
+							<div class="col text-col">
+								<h2>
+									Olá... <br> 
+									Meu nome é Marcelo Nascimento. <br class="text-none">
+									Sou desenvolvedor. Crio sites, sistemas e aplicativos. <br class="text-none">
+									Sou formado em Análise e Desenvolvimento de sistemas <br class="text-none">
+									e apaixonado por Tecnologia da Informação. <br class="text-none">
+									Amo o que faço pois programar é meu hobbie. <br class="text-none">
+									Trabalho com projetos, e tenho experiência em <br class="text-none"> 
+									desenvolvimento de sites responsivos, com aplicação <br class="text-none">
+									de técnicas de SEO (técnicas para ajudar na otimização <br class="text-none">
+									de pesquisas do Google). <br class="text-none">
+									Também trabalho com aplicativos híbridos <br class="text-none">
+									que funcionam tanto em Android como em IOS. <br class="text-none">
+							</section>
+						</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-center">
+		<div class="">
+			<div  class="container-center-img"  parallax-background parallax-ratio="0.5">
+				<div class="content-container-center">
+					<div class="col-md-4">
+						<div>
+							<img src="../img/responsive.png" alt="" class="image-conteiner-center">
+						</div>
+						<div class="text-about-image-center">
+							<h2>Sites responsivos</h2>
+							<h4>
+								Crie sites responsivos que se ajustam com qualquer tipo de dispositivos 
+								como PCs, Tablets e Smartphones. Além de mantes o padrão e a beleza do
+								site, pode ser configurado para ter reações diferentes para cada resolução.
+							</h4>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<img src="../img/application.png" alt="" class="image-conteiner-center">
+						<div class="text-about-image-center">
+							<h2>Aplicativos</h2>
+							<h4>
+								Crie aplicativos para sua empresa, traga aos seus clientes o prazer de 
+								negociar com você por meio da facilidade e diversão que será proposto
+								a eles por meio de um aplicativo.
+							</h4>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<img src="../img/websystem.png" alt="" class="image-conteiner-center">
+						<div class="text-about-image-center">
+							<h2>Sistemas Web</h2>
+							<h4>
+								Crie Sistemas Web para gerenciar seus negócios como sistemas de gestão 
+								de clientes, de gestão de financias, painel de gerenciamento para sites
+								ou aquele sistema que atenderá todas a regras de negócios da sua empresa.
+							</h4>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="text-center-reflection">	
+					"Nunca é tarde para tentar o desconhecido. Nunca é tarde para ir mais além." <br>
+					-Gabriele D'Annunzio
+				</div>	 -->	
+			</div>
+		</div>
+	</div>
+	<section name="project" id="projetos">
+		<div class="container">
+			<div class="row bottom-content">
+				<h2 class="project">Conheça alguns de meus projetos</h2>
+				<div class="align-projects">
+					<div class="" ng-repeat="dataProject in dataProjects">
+						<h2>{{dataProject.name}}</h2>
+						<div class="portifolio">
+							<h5><a ng-href="//{{ dataProject.link}}" TARGET="_blank">{{dataProject.link}}</a></h5>
+							<div ng-carousel ng-carousel-name="example-carousel{{$index}}" ng-carousel-timer="5000">
+								<slidecontainer>
+									<slide ng-repeat="image in dataProject.upload.data | orderBy:'order'">
+										<img data-ng-src="{{image.way + image.original_filename}}">
+									</slide>
+								</slidecontainer>
+							</div>
+							<h5>{{dataProject.description}}</h5>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	<div class="">
+		<div class="footer-img-contact" parallax-background parallax-ratio="0.5">
+			<div class="text-profile-under-one">
+				<h2>Entre em contato ! </h2>
+				<br>
+				Tire todas as suas duvidas agora mesmo. <br  class="hide-footer-text">
+				Aproveite e tenha em mãos seu site ou aplicativo. <br  class="hide-footer-text">
+			</div>
+		</div>
+	</div>
+	<section name="contact" id="contato">
+		<div class="contact-container">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+					<h1>Entre em contato</h1>
+						<form name="form" class="form">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Seu nome..." ng-model="data.name" ng-required="true">
+							</div>
+							<div class="form-group">
+								<input type="email" class="form-control" placeholder="Seu e-mail..." ng-model="data.email" ng-required="true">
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Assunto..." ng-model="data.subject" ng-required="true">
+							</div>
+							<div class="form-group">
+								<textarea type="text" class="form-control" placeholder="Descrição..." ng-model="data.description" ng-required="true" rows="6"></textarea>
+							</div>
+							<div class="form-group">
+								<button type="button" class="btn btn-success btn-send" ng-click="sendEmail(data)" ng-disabled="form.$invalid">Enviar</button>
+							</div>
+							<div class="snackbar-container" data-snackbar="true" data-snackbar-duration="3000" data-snackbar-remove-delay="3000"></div>
+							<div id="loading-bar-container"></div>
+						</form>
+					</div>
+					<div class="col-md-6">
+					<h1>Cadastre-se</h1>
+						<form name="news" class="form">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Seu nome..." ng-model="news.name" required ng-required="true">
+							</div>
+							<div class="form-group">
+								<input type="email" class="form-control" placeholder="Seu e-mail..." ng-model="news.email" required ng-required="true">
+							</div>
+							<div class="form-group">
+								<button type="button" class="btn btn-success btn-send" ng-click="registerNews(news)" ng-disabled="news.$invalid">Registrar</button>
+							</div>
+							<div class="snackbar-container" data-snackbar="true" data-snackbar-duration="3000" data-snackbar-remove-delay="3000"></div>
+							<div id="loading-bar-container"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<div class="">
+		<div class="footer-img" parallax-background parallax-ratio="0.5">
+			<div class=" text-profile-under">
+				<h3>Seu negócio merece o que ha de mais inovador no mercado. </h3>
+				 <br class="text-profile-under-none">
+				Ame seu empreendimento! <br>
+				Use a tecnologia como sua aliada em um <br class="hide-footer-text">
+				mercado tão vasto e competitivo. Saia na <br class="hide-footer-text"> 
+				frente e permaneça na frente! <br>
+				Não tenha medo de voar mais alto.
+			</div>
+		</div>
+	</div>
+<div class="footer">
+		<div class="footer-align-logo">
+			<img src="../img/logo1.png" class="footer-logo">
+		</div>
+		<div class="footer-text">
+		Nossa missão é de trazer mobilidade, agilidade e praticidade <br>
+	    aos seus negócios, a fim de ajudá-los a alcançar seus sonhos e <br>
+	    mudar o mundo. <br>
+		</div>
+		<div class="social-footer">
+			
+			<a class="btn btn-social-icon btn-facebook" href="https://www.facebook.com/marcelo.nascimento.9275">
+				<span class="fa fa-facebook"></span>
+			</a>
+			<a class="btn btn-social-icon btn-linkedin" href="#">
+				<span class="fa fa-linkedin"></span>
+			</a>
+			<a class="btn btn-social-icon btn-github" href="https://github.com/marcelojunin">
+				<span class="fa fa-github"></span>
+			</a>
+		</div>
+	</div>
+</div>

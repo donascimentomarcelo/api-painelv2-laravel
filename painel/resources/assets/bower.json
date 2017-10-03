@@ -1,0 +1,21 @@
+{
+  "name": "admin",
+  "homepage": "https://github.com/marcelojunin/marcelo",
+  "authors": [
+    "marcelojunin <marcelojunin2010@hotmail.com>"
+  ],
+  "description": "Painel admin",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

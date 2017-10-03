@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Painel
+        psr4_prefix: Painel
+        src_path: app
