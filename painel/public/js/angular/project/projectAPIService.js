@@ -60,6 +60,7 @@ angular.module('project')
 					});
 			};
 
+
 			var _updateImage = function(data){
 				return Upload.upload({
                         url: config.baseUrl + '/image/update',
@@ -114,6 +115,10 @@ angular.module('project')
 				return $http.post( config.baseUrl + '/image/destroy/' + data.id);
 			};
 
+			var _destroyProject = function(data){
+				return $http.get(config.baseUrl + '/project/destroy/' +  data.id );
+			}
+
 			var _updateOrder = function(data){
 				
 				return $http.post( config.baseUrl + '/image/updateOrder', data);
@@ -130,6 +135,8 @@ angular.module('project')
 		saveProject       : _saveProject,
 
 		updateProject     : _updateProject,
+
+		destroyProject    : _destroyProject,
 
 		updateImage       : _updateImage,
 

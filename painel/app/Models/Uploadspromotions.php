@@ -10,6 +10,8 @@ class Uploadspromotions extends Model implements Transformable
 {
     use TransformableTrait;
 
+    public $timestamps = false;
+    
     protected $fillable = [ 'promotions_id',
 							'filename',
 							'way',

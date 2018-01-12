@@ -11,37 +11,34 @@ angular.module('project',['cfp.loadingBar', 'angular.snackbar', 'ngFileUpload'])
     function ($rootScope, $http, Upload, cfpLoadingBar, $projectAPIService, $projectVerifyAPIService, snackbar) {
 
      $rootScope.project = [];
+
      $rootScope.save = function(){
-        // if($rootScope.project.file)
-        if(!$rootScope.project.id)
-        {
-            $rootScope.upload($rootScope.project);
-        }
-        else if(!$rootScope.project.file && $rootScope.project.id)
+
+        if($rootScope.project.id)
         {
             $rootScope.update($rootScope.project);
         }
         else
         {
-            snackbar.create('Você precisa anexar uma imagem ao projeto.');
+            $rootScope.createProject($rootScope.project);
         }
     }
 
-    $rootScope.upload = function (project) {
+    $rootScope.createProject = function (project) {
         cfpLoadingBar.start();
         var promise = $projectAPIService.saveProject(project);
 
         promise.then(function (data) {
-            $rootScope.project = data.data.data;
-            $projectVerifyAPIService.verifyDataProject(data);
+            cfpLoadingBar.complete();
+            snackbar.create('Projeto ' + data.data.data.id + ' salvo com sucesso!');
+            // delete $rootScope.project;
+            $rootScope.project = [];
+            // erro Cannot read property 'id' of undefined qnd descomenta essa linha
         }, function (resp) {
             cfpLoadingBar.complete();
             snackbar.create('Houve um erro ao criar o projeto!');   
             console.log('Error status: ' + resp.status);
             console.log('Error status: ' + resp);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     };
 
@@ -50,16 +47,22 @@ angular.module('project',['cfp.loadingBar', 'angular.snackbar', 'ngFileUpload'])
     }
 
     $rootScope.edit = function(data){
-        cfpLoadingBar.start();
+        if(!data.id)
+        {
+            return snackbar.create('Insira o código da pesquisa!')
+        }
+        // cfpLoadingBar.start();
         var promise = $projectAPIService.getEdit(data);
 
         promise.then(function(data){
             $projectVerifyAPIService.verifyResponseEdit(data);
         }, function(dataError){
-            cfpLoadingBar.complete();
             console.log(dataError)
+            delete $rootScoope.project;
+            delete $rootScoope.cod;
             if(parseInt(dataError.status) === 404){  
                 snackbar.create('Esse projeto não existe!'); 
+                delete $rootScoope.project;
             }
         })
     };
@@ -78,6 +81,22 @@ angular.module('project',['cfp.loadingBar', 'angular.snackbar', 'ngFileUpload'])
             snackbar.create('Houve um erro ao atualizar o projeto!');
         })
     };
+
+    $rootScope.deleteProject = function(){
+        cfpLoadingBar.start();
+
+        var promise = $projectAPIService.destroyProject($rootScope.project);
+        promise.then(function(data){
+            console.log(data)
+            cfpLoadingBar.complete();
+            snackbar.create("Projeto excluido com sucesso!");
+            delete $rootScope.project;
+        }, function(data){
+            cfpLoadingBar.complete();
+            snackbar.create("Erro ao excluir projeto!");
+        })
+    }
+
     $rootScope.img = [];
     $rootScope.updateImage = function(){
         if(!$rootScope.img.id)
@@ -100,7 +119,15 @@ angular.module('project',['cfp.loadingBar', 'angular.snackbar', 'ngFileUpload'])
     };
 
     $rootScope.updateImageApply = function(dataImg){
-         cfpLoadingBar.start();
+
+        if(!$rootScope.img.id){
+            return snackbar.create('Selecione um projeto!');
+        };
+
+        var ext = $rootScope.img.file[0].name.match(/\.(.+)$/)[1];
+
+        if(angular.lowercase(ext) ==='jpg' || angular.lowercase(ext) ==='jpeg' || angular.lowercase(ext) ==='png'){
+            cfpLoadingBar.start();
             var promise = $projectAPIService.updateImage(dataImg);
             promise.then(function(data){
                 $rootScope.img = data.data.img.data;
@@ -112,6 +139,11 @@ angular.module('project',['cfp.loadingBar', 'angular.snackbar', 'ngFileUpload'])
                 console.log(dataError);
                 snackbar.create('Houve um erro ao atualizar a imagem!');
             });
+        }
+        else
+        {
+            snackbar.create('Serão aceitas apenas imagens no formato .jpeg, .jpg e .png!');
+        }
     };
 
     $rootScope.updateOnlyOrderApply = function(data){
@@ -153,6 +185,7 @@ angular.module('project',['cfp.loadingBar', 'angular.snackbar', 'ngFileUpload'])
             cfpLoadingBar.complete();
             snackbar.create('Imagem excluida com sucesso!');
             $rootScope.project = data.data.data;
+            $rootScope.uploadLength = data.data.data.upload.data.length;
         }, function(dataError){
             cfpLoadingBar.complete();
             console.log(dataError);
@@ -161,11 +194,13 @@ angular.module('project',['cfp.loadingBar', 'angular.snackbar', 'ngFileUpload'])
     };
 
     $rootScope.addImage = function(){
-        if(!$rootScope.project.id){
-            snackbar.create('Selecione um projeto');
-        };
 
-        if($rootScope.project.file){
+        if(!$rootScope.project.id){
+            return snackbar.create('Selecione um projeto!');
+        };
+        var ext = $rootScope.project.file[0].name.match(/\.(.+)$/)[1];
+
+        if(angular.lowercase(ext) ==='jpg' || angular.lowercase(ext) ==='jpeg' || angular.lowercase(ext) ==='png'){
             cfpLoadingBar.start();
             var promise = $projectAPIService.addImage($rootScope.project);
             promise.then(function(data){
@@ -175,7 +210,12 @@ angular.module('project',['cfp.loadingBar', 'angular.snackbar', 'ngFileUpload'])
                 snackbar.create('Houve um erro ao inserir a imagem!');
                 console.log(dataError);
             });
-        };
+        }  
+        else{
+            snackbar.create('Serão aceitas apenas imagens no formato .jpeg, .jpg e .png!');
+        }
+
+
     };
 
     $rootScope.fillImage = function(data){

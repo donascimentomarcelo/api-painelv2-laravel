@@ -3,6 +3,7 @@
 namespace Painel\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Painel\Http\Controllers\Controller;
 use Painel\Http\Requests;
@@ -50,28 +51,76 @@ class PromotionsController extends Controller
 
     public function create(Request $request)
     {
-        $files = Input::file('file');
-        // return $this->promotionsService->validatePromotions($request->all());
-        
-        $validator = $this->uploadService->validateFiles($files);
-        if($validator->fails())
-        {
-            $error['message'] = 'Só serão aceitas imagens no formato jpg, jpeg e png.';
-            $error['status'] = 333;
-            return $error;
-        }
-        $id = $this->promotionsRepository->skipPresenter()->create($request->all());
-        $response = $this->promotionsService->saveUpload($files, $id);
-        return json_encode($response);
+        $data = $request->all();
+
+        $data['responsable'] = Auth::user()->name;
+        $data['email'] = Auth::user()->email;
+
+        return $this->promotionsRepository->create($data);
+
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        return $this->promotionsRepository->update($request->all(), $request->id);
         
     }
 
     public function delete($id)
     {
+        return $this->promotionsService->destroy($id);
+    }
+
+    public function edit($id)
+    {
+        return $this->promotionsRepository->find($id);
+    }
+
+    public function image()
+    {
+        return view('admin.promotions.image');
+    }
+
+    public function addNewImage(Request $request)
+    {
+        // return Input::file('file');
+        $id = $request->id;
+
+        $res = $this->promotionsService->countImage($id);
+
+        if($res->result == 0)
+        {
+            $this->promotionsService->saveUpload(Input::file('file') ,$id);
+            
+            return $this->promotionsRepository->find($id); 
+        }
+        else
+        {
+            $return['status'] = 4;
+            $return['message'] = 'Essa promoção já possui uma imagem vinculada.';
+            return $return;
+        }
+
+        // foreach ($request->file('file')as $key) {
+        //    echo '<pre>';
+        //    echo($key);
+        //    echo '</pre>';
+        // }
+    }
+
+    public function updateImage(Request $request)
+    {
+        $data = $this->uploadspromotionsRepository->skipPresenter()->find($request->id);
+
+        $this->promotionsService->updateImage($request->id, Input::file('file'), $data);
         
+        return  $this->getNewImage($request->id); 
+    }
+
+    public function getNewImage($id)
+    {
+        $image = $this->uploadspromotionsRepository->skipPresenter()->find($id);
+
+        return $this->promotionsRepository->find($image->promotions->id);
     }
 }

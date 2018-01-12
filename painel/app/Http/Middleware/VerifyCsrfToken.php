@@ -13,6 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'painel/email',
-        'emails/create'
+        'emails/create',
+        'project/destroy/{id}'
     ];
 }

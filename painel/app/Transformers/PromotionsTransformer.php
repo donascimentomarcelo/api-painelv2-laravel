@@ -27,10 +27,16 @@ class PromotionsTransformer extends TransformerAbstract
             'id'         => (int) $model->id,
             'name'       => $model->name,
             'title'      => $model->title,
+            'email'      => $model->email,
+            'responsable'=> $model->responsable,  
+            'price'      => (double)$model->price,    
+            'percent'    => (int)$model->percent,
+            'result'     => (double)$model->result,
+            'status'     => $model->status,
             'description'=> $model->description,
-            'dt_start'   => $model->dt_start,
-            'dt_middle'  => $model->dt_middle,
-            'dt_end'     => $model->dt_end
+            'created_at' => str_replace(" ", "T", $model->created_at),
+            'updated_at' => str_replace(" ", "T", $model->updated_at),
+            'dt_end'     => str_replace(" ", "T", $model->dt_end)
 
         ];
     }

@@ -22,16 +22,13 @@
 				<div class="panel-heading"><h4>Criar Projeto</h4></div>
 				<div class="panel-body">
 
-					{!! Form::open(['name'=>'form','route'=>'admin.painel.create.project', 'class'=>'form', 'files'=>true])!!}
-						{!! csrf_field() !!}
-
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<form name="searchById">
 							<div class="form-group">
 								<label for="">Código do Projeto</label>
 								<div class="input-group">
-									<input type="number" class="form-control" min="0" ng-model="cod.id" ng-required="true">
+									<input type="number" class="form-control" min="0" ng-model="cod.id" ng-required="true" ng-change='<% checkboxModel.findSpeed %>'>
 									<span class="input-group-btn">
 										<button class="btn btn-primary"  type="button" ng-click="edit(cod)" ng-disabled="searchById.$invalid">
 											<span class="glyphicon glyphicon-search"></span>
@@ -41,67 +38,68 @@
 							</div>
 						</form>
 					</div>
-					<div class="col-md-6">
-							<div class="form-group">
+					<div class="col-md-4">
+						<label for="">Modo pesquisa rápida</label>
+						<div class="input-group">
+							<input type="checkbox" ng-model="checkboxModel.findSpeed" ng-true-value="findProjecChangeInput(cod)" ng-false-value="' '">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							{!! Form::label('Uploads do projeto', 'Uploads do projeto') !!}
+							{!! Form::text('upload', null, ['class' => 'form-control', 'ng-model'=>'uploadLength']) !!}
+						</div>
+					</div>
+				</div>
+					{!! Form::open(['name'=>'ProjectForm','route'=>'admin.painel.create.project', 'class'=>'form', 'files'=>true])!!}
+						{!! csrf_field() !!}
+						<div class="row">
+							<div class="col-md-4">
+
 								{!! Form::hidden('id', null, ['class' => 'form-control', 'ng-model'=>'project.id']) !!}
-							</div>
-							<div class="form-group">
-								{!! Form::label('Nome', 'Nome') !!}
-								{!! Form::text('name', null, ['class' => 'form-control', 'ng-model'=>'project.name']) !!}
-							</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-							<div class="form-group">
-								{!! Form::label('Categoria', 'Categoria') !!}
-								{!! Form::text('category', null, ['class' => 'form-control', 'ng-model'=>'project.category']) !!}
-							</div>
-					</div>
-					<div class="col-md-6">
-							<div class="form-group">
-								{!! Form::label('Link', 'Link') !!}
-								{!! Form::text('link', null, ['class' => 'form-control', 'ng-model'=>'project.link']) !!}
-							</div>
-					</div>
-				</div>
-							<div class="form-group">
-								{!! Form::label('Descrição', 'Descrição') !!}
-								{!! Form::textarea('description', null, ['class' => 'form-control', 'ng-model'=>'project.description']) !!}
+
+								<div class="form-group">
+									{!! Form::label('Nome', 'Nome') !!}
+									{!! Form::text('name', null, ['class' => 'form-control', 'ng-model'=>'project.name']) !!}
+								</div>
 							</div>
 
-<!-- 
-							<div class="form-group">
-								<span class="btn btn-default btn-file">
-									<input type="file" ngf-select ng-model="project.file" name="file"    
-									accept="image/*" ngf-max-size="2MB"  multiple
-									ngf-model-invalid="errorFile">
-									<span class="glyphicon glyphicon-folder-open"></span> Selecione as imagens
-								</span>
-							</div> -->
-							
-<!-- 							<div class="form-group">
-								<div class="row" ng-show="project.upload.data">
-									<div ng-repeat="p in project.upload.data" class="col-md-4">
-										<img data-ng-src="<% p.way + p.original_filename %>" class="img-project-list">
-									</div>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									{!! Form::label('Categoria', 'Categoria') !!}
+									{!! Form::text('category', null, ['class' => 'form-control', 'ng-model'=>'project.category']) !!}
 								</div>
-							</div> -->
-						
-						<div class="form-group">
-						{!! Form::submit('Salvar', ['class'=>'btn btn-primary', 'ng-click'=>'save()'])!!}
-						
-						{!! Form::button('Limpar', ['class'=>'btn btn-info', 'ng-click'=>'clear()'])!!}
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									{!! Form::label('Link', 'Link') !!}
+									{!! Form::text('link', null, ['class' => 'form-control', 'ng-model'=>'project.link']) !!}
+								</div>
+							</div>
 						</div>
 
-
-					<div id="loading-bar-container"></div>	    
-					{!! Form::close()!!}
-					<div class="snackbar-container" data-snackbar="true" data-snackbar-duration="5000" data-snackbar-remove-delay="200"></div>
+				<div class="form-group">
+					{!! Form::label('Descrição', 'Descrição') !!}
+					{!! Form::textarea('description', null, ['class' => 'form-control', 'ng-model'=>'project.description']) !!}
 				</div>
+
+				<div class="form-group">
+					{!! Form::button('Salvar', ['class'=>'btn btn-primary', 'ng-disabled'=>'!(project.name && project.category && project.link && project.description)', 'ng-click'=>'save()'])!!}
+
+					{!! Form::button('Limpar', ['class'=>'btn btn-info', 'ng-disabled'=>'!(project.name && project.category && project.link && project.description)', 'ng-click'=>'clear()'])!!}
+
+					{!! Form::button('Excluir', ['class'=>'btn btn-danger', 'ng-disabled'=>'!(project.id && project.name && project.category && project.link && project.description)', 'ng-click'=>'deleteProject()'])!!}
+				</div>
+
+
+				<div id="loading-bar-container"></div>	    
+				{!! Form::close()!!}
+				<div class="snackbar-container" data-snackbar="true" data-snackbar-duration="5000" data-snackbar-remove-delay="200"></div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <style>
 	#loading-bar .bar {

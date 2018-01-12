@@ -38,10 +38,10 @@ class ImageController extends Controller
     {
         $id = $request->id;
         $files = Input::file('file');
-        $validator = $this->projectService->validateFiles($files);
-        if($validator->fails()){
-            return 3;
-        }
+        // $validator = $this->projectService->validateFiles($files);
+        // if($validator->fails()){
+        //     return 3;
+        // }
         $dataImage = $this->uploadsRepository->skipPresenter()->find($id);
 
         $return['img'] = $this->projectService->updateImage($files, $id, $dataImage);

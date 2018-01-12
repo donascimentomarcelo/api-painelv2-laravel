@@ -150,6 +150,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
+        // Connection oracle
+        Yajra\Oci8\Oci8ServiceProvider::class,
+
     ],
 
     /*

@@ -15,6 +15,7 @@
 	{!! Html::script('js/angular/lib/snackbar/snack.js') !!}
 	{!! Html::style('js/angular/lib/snackbar/snack.css') !!}
 	{!! Html::style('css/style.css') !!}
+	{!! Html::style('css/altered.css') !!}
 	
 	{!! Html::script('js/menu/menu.js') !!}
 
@@ -49,9 +50,11 @@
 					<li class='last'><a href="{{route('admin.painel.projectView') }}"><span>Exibir</span></a></li>
 				</ul>
 			</li>
-			<li class='has-sub'><a href='#'><span>Imagem</span></a>
+			<li class='has-sub'><a href='#'><span>Promoções</span></a>
 				<ul>
-					<li class='last'><a href="{{route('admin.painel.projectedit') }}"><span>Gerenciar</span></a></li>
+					<li><a href="{{route('admin.painel.promotions.store') }}"><span>Criar</span></a></li>
+					<li class='last'><a href="{{route('admin.painel.promotions.list') }}"><span>Exibir</span></a></li>
+					<li class='last'><a href="{{route('admin.painel.promotions.list') }}"><span>Visualizar</span></a></li>
 				</ul>
 			</li>
 			<li class='has-sub'><a href='#'><span>Publicações</span></a>
@@ -65,10 +68,10 @@
 					<li class='last'><a href="{{route('admin.painel.emails.list') }}"><span>Exibir</span></a></li>
 				</ul>
 			</li>
-			<li class='has-sub'><a href='#'><span>Promoções</span></a>
+			<li class='has-sub'><a href='#'><span>Imagem</span></a>
 				<ul>
-					<li><a href="{{route('admin.painel.promotions.store') }}"><span>Criar</span></a></li>
-					<li class='last'><a href="{{route('admin.painel.promotions.list') }}"><span>Exibir</span></a></li>
+					<li class='last'><a href="{{route('admin.painel.projectedit') }}"><span>Projeto</span></a></li>
+					<li class='last'><a href="{{route('admin.painel.promotions.image') }}"><span>Promoção</span></a></li>
 				</ul>
 			</li>
 			<li class='has-sub'><a href='#'><span>{{ auth()->user()->name }} </span></a>

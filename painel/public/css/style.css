@@ -83,7 +83,12 @@ footer{
 .footer-text{
     text-align: center;
 }
-
+@media(max-width: 768px)
+{
+  .img-project-edit{
+    width: 50%;
+  }
+} 
 /**MENU**/
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700);
 

@@ -34,11 +34,11 @@ class ProjectController extends Controller
     public function saveProject(Request $request)
     {
         
-        $id = $this->projectRepository->skipPresenter()->create($request->all());
+        $return = $this->projectRepository->create($request->all());
         // dd($id);
         // $response = $this->projectService->save($files, $id);
 
-        $return['status'] = 1;
+        // $return['status'] = 1;
 
         return $return;
     }
@@ -69,8 +69,6 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-
-        // return $this->projectService->edit($id);
         return $this->projectRepository->edit($id);
 
     }
@@ -79,7 +77,12 @@ class ProjectController extends Controller
          return view('admin.project.edit-project');
     }
 
-    
+    public function destroyProject($id)
+    {
+        $return = $this->projectService->deleteImageAndProject($id);
+        
+        return json_encode($return);
+    }
 
    
 

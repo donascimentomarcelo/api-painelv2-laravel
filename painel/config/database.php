@@ -85,6 +85,18 @@ return [
             'prefix'   => '',
         ],
 
+        'oracle' => [
+            'driver'   => 'oracle',
+            // 'tns'      => env('DB_TNS', ''),
+            'host'     => env('DB_HOST', 'localhost'),
+            'port'     => env('DB_PORT', '1521'),
+            'database' => env('DB_DATABASE', 'juniorm1_programmer'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', 'root'),
+            'charset'  => env('DB_CHARSET', 'AL32UTF8'),
+            'prefix'   => env('DB_PREFIX', ''),
+        ],
+
     ],
 
     /*

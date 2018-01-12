@@ -28,6 +28,7 @@ angular.module('project').factory('$projectVerifyAPIService',
 					cfpLoadingBar.complete();
                 	snackbar.create('Imagem inserida com sucesso!');
                 	$rootScope.project = data.data.return.data;
+                	$rootScope.uploadLength = data.data.return.data.upload.data.length;
 				}
 				else if(parseInt(data.data.status) === 3)
 				{
@@ -44,15 +45,16 @@ angular.module('project').factory('$projectVerifyAPIService',
 			var _verifyResponseEdit = function(data){
 				if(parseInt(data.data.status) === 200)
 				{
-					cfpLoadingBar.complete();
+					$rootScope.uploadLength = data.data.return.data.upload.data.length;
 		            $rootScope.project = data.data.return.data;
 		            $rootScope.containerImg = true;	
 				}
 				else if(parseInt(data.data.status) === 404) 
 				{
-					cfpLoadingBar.complete();
 					$rootScope.containerImg = false;	
 					snackbar.create(''+ data.data.message +'');
+					delete $rootScope.project;
+					delete $rootScope.uploadLength;
 				}
 			}
 

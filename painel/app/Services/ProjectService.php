@@ -3,6 +3,7 @@
 namespace Painel\Services;
 
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -95,9 +96,31 @@ class ProjectService
 
     }
 
-    public function removeUpload($upload)
+    public function deleteImageAndProject($id)
     {
 
+      $data = DB::table('uploads')->where('projects_id', $id)->get();
+      // verificar qtdd d valores retornados na consulta. Se for zero, n entra no foreach
+
+      if(count($data) > 0)
+      {
+        foreach ($data as $key)
+        {
+          $returnResult = Uploads::where('original_filename', $key->original_filename);
+
+          $this->uploadService->removeUpload($key, $returnResult);
+        }
+      }
+      
+      $this->projectsRepository->delete($id);
+      
+      return 1;
+
+    }
+
+    public function removeUpload($upload)
+    // essa função deleta a imagem do repositório e dps vai na tabela upload e deleta o registro de la tb de acordo com o original filename
+    {
       try {
 
         $this->uploadService->destroyImageInStorage($upload);

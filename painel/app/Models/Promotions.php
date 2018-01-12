@@ -10,13 +10,18 @@ class Promotions extends Model implements Transformable
 {
     use TransformableTrait;
 
+    
     protected $fillable = [ 
-				            'name',
-				            'title',
-				            'description',
-				            'dt_start',
-				            'dt_middle',
-				            'dt_end' ];
+					    	'name',	
+					    	'email',
+					    	'responsable',	
+					    	'title',	
+					    	'price',	
+					    	'percent',
+					    	'result',
+					    	'status',
+					    	'dt_end',
+					    	'description' ];
 
 	public function uploadspromotions()
 	{

@@ -20,7 +20,6 @@ class CreateUploadspromotionsTable extends Migration
             $table->string('original_filename');
             $table->integer('promotions_id')->unsigned();
             $table->foreign('promotions_id')->references('id')->on('promotions');
-            $table->timestamps();
         });
     }
 

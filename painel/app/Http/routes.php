@@ -40,6 +40,7 @@
 		Route::get('project/list',['as' => 'painel.projectlist', 'uses' => 'ProjectController@listProject']);
 		Route::get('project/edit',['as' => 'painel.projectedit', 'uses' => 'ProjectController@editProject']);
 		Route::get('project/edit/{id}',['as' => 'painel.edit', 'uses' => 'ProjectController@edit']);
+		Route::get('project/destroy/{id}',['as' => 'painel.destroy', 'uses' => 'ProjectController@destroyProject']);
 		Route::post('project/update',['as' => 'painel.update', 'uses' => 'ProjectController@updateProject']);
 
 		Route::get('image/edit/{id}',['as' => 'painel.image', 'uses' => 'ImageController@editImage']);
@@ -70,11 +71,16 @@
 		Route::get('promotions/list',['as' => 'painel.promotions.list', 'uses' => 'PromotionsController@index']);
 		Route::get('promotions/store',['as' => 'painel.promotions.store', 'uses' => 'PromotionsController@store']);
 		Route::get('promotions/show',['as' => 'painel.promotions.show', 'uses' => 'PromotionsController@show']);
+		Route::get('promotions/edit/{id}',['as' => 'painel.promotions.edit', 'uses' => 'PromotionsController@edit']);
+		Route::get('promotions/edit',['as' => 'painel.promotions.image', 'uses' => 'PromotionsController@image']);
+		Route::get('promotions/delete/{id}',['as' => 'painel.promotions.delete', 'uses' => 'PromotionsController@delete']);
 		Route::post('promotions/create',['as' => 'painel.promotions.create', 'uses' => 'PromotionsController@create']);
 		Route::post('promotions/update',['as' => 'painel.promotions.update', 'uses' => 'PromotionsController@update']);
-		Route::post('promotions/delete',['as' => 'painel.promotions.delete', 'uses' => 'PromotionsController@delete']);
+		Route::post('promotions/addNewImage',['as' => 'painel.promotions.addNewImage', 'uses' => 'PromotionsController@addNewImage']);
+		Route::post('promotions/updateImage',['as' => 'painel.promotions.updateImage', 'uses' => 'PromotionsController@updateImage']);
 	});
 	// Route::get('email/send/multiple',['as' => 'email.send', 'uses' => 'EmailController@sendEmail']);
 	
 	Route::get('api/project/list',['as' => 'api.project.list', 'uses' => 'Api\ApiProjectController@ApiListProject']);
-// Route::post('promotions/create',['as' => 'painel.promotions.create', 'uses' => 'PromotionsController@create']);
+Route::post('promotions/addNewImage',['as' => 'painel.promotions.addNewImage', 'uses' => 'PromotionsController@addNewImage']);
+Route::post('promotions/updateImage',['as' => 'painel.promotions.updateImage', 'uses' => 'PromotionsController@updateImage']);

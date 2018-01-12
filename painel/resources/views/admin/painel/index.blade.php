@@ -13,10 +13,35 @@
 				<div class="panel-heading" style="text-align: center;"><h4>{{ auth()->user()->name }}, bem vindo ao Painel!!!</h4></div>
 
 				<div class="panel-body">
-					Criar aqui um painel com informações do usuário, de configs do painel, do site...<br>
-					ex: <br>
-					ftp: www.marcelo.com <br>
-					email cadastrados: 10 ...
+					<ul class="nav nav-pills  nav-justified">
+						<li class="active"><a href="#first-tab" data-toggle="tab">Dashboard</a></li>
+						<li><a href="#second-tab" data-toggle="tab">Projetos</a></li>
+						<li><a href="#third-tab" data-toggle="tab">Promoções</a></li>
+						<li><a href="#fourth-tab" data-toggle="tab">Publicações</a></li>
+						<li><a href="#fitth-tab" data-toggle="tab">E-mails</a></li>
+						<li><a href="#sixth-tab" data-toggle="tab">Configurações</a></li>
+					</ul>
+
+					<div class="tab-content">
+						<div class="tab-pane fade active in" id="first-tab">
+							<p>Aqui vai o conteúdo da primeira aba.</p>
+						</div>
+						<div class="tab-pane fade" id="second-tab">
+							<p>Aqui vai o conteúdo da segunda aba.</p>
+						</div>
+						<div class="tab-pane fade" id="third-tab">
+							<p>Aqui vai o conteúdo da terceira aba.</p>
+						</div>
+						<div class="tab-pane fade" id="fourth-tab">
+							<p>Aqui vai o conteúdo da quarta aba.</p>
+						</div>
+						<div class="tab-pane fade" id="fitth-tab">
+							<p>Aqui vai o conteúdo da quinta aba.</p>
+						</div>
+						<div class="tab-pane fade" id="sixth-tab">
+							<p>Aqui vai o conteúdo da sexta aba.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

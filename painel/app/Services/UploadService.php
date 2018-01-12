@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Painel\Models\Uploads;
+// use Painel\Models\Uploadspromotions;
 use Painel\Repositories\ProjectsRepository;
 use Painel\Repositories\UploadsRepository;
 
@@ -77,6 +78,27 @@ class UploadService
         return $arr;
     }
 
+    public function singleUpload($file, $entityManager)
+    {
+       $destinationPath = 'uploads';
+       $filename = $file->getClientOriginalName();
+
+       $filename = $this->renameFile($filename);
+       $upload_success = $file->move($destinationPath, $filename);
+
+       $extension = $file->getClientOriginalExtension();
+       $entry = $entityManager;
+       $entry->mime = $file->getClientMimeType();
+       $entry->original_filename = $filename;
+       $entry->filename = $file->getFilename().'.'.$extension;
+
+       $entry->way = $this->way();
+
+       $arr[] = $entry;
+
+       return $arr;
+    }
+
 
     public function renameFile($filename)
     {
@@ -94,6 +116,25 @@ class UploadService
       return $newname;
     }
     
+    public function removeUpload($upload, $entityResult)
+    // essa função deleta a imagem do repositório e dps vai na tabela upload e deleta o registro de la tb de acordo com o original filename
+    {
+      try {
+
+        $this->destroyImageInStorage($upload);
+
+        $entityResult->delete();
+
+        return 1;
+
+      } catch (Exception $e) {
+
+        throw $e;
+      
+      }
+
+    }
+
     public function destroyImageInStorage($image)
     {
       File::delete('uploads/'.$image->original_filename);
