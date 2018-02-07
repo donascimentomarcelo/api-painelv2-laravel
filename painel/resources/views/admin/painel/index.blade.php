@@ -4,7 +4,8 @@
 
 {!! Html::style('css/style.css') !!}
 {!! Html::style('css/altered.css') !!}
-
+{!! Html::script('js/bi/Chart.js') !!}
+{!! Html::script('js/bi/script.js') !!}
 
 <div class="container-fluid align-div-principal" >
 	<div class="row">
@@ -24,7 +25,30 @@
 
 					<div class="tab-content">
 						<div class="tab-pane fade active in" id="first-tab">
-							<p>Aqui vai o conteúdo da primeira aba.</p>
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-4">
+										<canvas id="dashboard" width="400" height="400"></canvas>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">teste</div>
+										<div class="form-group">teste</div>
+										<div class="form-group">teste</div>
+										<div class="form-group">teste</div>
+									</div>
+									<!--
+									<div class="col-xs-6 col-sm-3">
+										<p>Indicador de Promoções</p>
+									</div>
+									<div class="col-xs-6 col-sm-3">
+										<p>Indicador de Publicações</p>
+									</div>
+									<div class="col-xs-6 col-sm-3">
+										<p>Indicador de E-mails</p>
+									</div> -->
+								</div>
+							</div>
+
 						</div>
 						<div class="tab-pane fade" id="second-tab">
 							<p>Aqui vai o conteúdo da segunda aba.</p>

@@ -78,6 +78,8 @@
 		Route::post('promotions/update',['as' => 'painel.promotions.update', 'uses' => 'PromotionsController@update']);
 		Route::post('promotions/addNewImage',['as' => 'painel.promotions.addNewImage', 'uses' => 'PromotionsController@addNewImage']);
 		Route::post('promotions/updateImage',['as' => 'painel.promotions.updateImage', 'uses' => 'PromotionsController@updateImage']);
+
+		Route::get('bi/projects',['as' => 'painel.projects.count', 'uses' => 'BIController@projectsCount']);
 	});
 	// Route::get('email/send/multiple',['as' => 'email.send', 'uses' => 'EmailController@sendEmail']);
 	
